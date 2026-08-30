@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -193,7 +194,10 @@ app.use((err,req,res,next)=>{
     let {status=500,message = "Some Error Occurred"} = err;
     res.render("listings/error.ejs",{status,message});
 })
-app.listen(port, () => {
-    console.log("Server is listening to port 8080 => http://localhost:8080/");
-});
+if (process.env.NODE_ENV !== "production") {
+    app.listen(port, () => {
+        console.log(`Server is listening to port ${port} => http://localhost:${port}/`);
+    });
+}
+
 module.exports = app;
