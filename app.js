@@ -6,7 +6,6 @@ const port = 8080;
 const mongo_url = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/airbnb';
 const path = require("path");
 const ejs_Mate = require("ejs-mate");
-const { float } = require("three/tsl");
 const methodOverride = require('method-override')
 const ExpressError =  require("./ExpressError.js");
 
