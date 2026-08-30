@@ -38,7 +38,9 @@ main().then(() => {
 });
 
 async function main() {
-    await mongoose.connect(mongo_url);
+    await mongoose.connect(mongo_url, { 
+        serverSelectionTimeoutMS: 5000 // Fails fast instead of hanging Vercel
+    });
 }
 
 // Database listing schema.............
