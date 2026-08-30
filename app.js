@@ -31,22 +31,16 @@ function asyncwrap(fn){
 
 
 
-// Database connect.......
-main().then(() => {
-    console.log("Database connected");
-})
-.catch((err) => {
-    console.log(err);
-});
-
-async function main() {
-    if (process.env.NODE_ENV === "production" && (!process.env.MONGO_URL || process.env.MONGO_URL.includes("127.0.0.1"))) {
-        throw new Error("CRITICAL VERCEL ERROR: You forgot to set the MONGO_URL Environment Variable in your Vercel Dashboard, or you set it incorrectly!");
+// Database connect caching for Serverless
+let isConnected = false;
+async function connectToDatabase() {
+    if (isConnected || mongoose.connection.readyState === 1) {
+        isConnected = true;
+        return;
     }
-    
-    await mongoose.connect(mongo_url, { 
-        serverSelectionTimeoutMS: 5000 
-    });
+    await mongoose.connect(mongo_url, { serverSelectionTimeoutMS: 5000 });
+    isConnected = true;
+    console.log("Database connected");
 }
 
 // Database listing schema.............
@@ -90,14 +84,16 @@ const listingSchema = new mongoose.Schema({
 const Listing = mongoose.model("listing", listingSchema);
 
 // Intercept requests if DB fails to connect
-app.use((req, res, next) => {
-    if (mongoose.connection.readyState !== 1) {
+app.use(async (req, res, next) => {
+    try {
+        await connectToDatabase();
+        next();
+    } catch (err) {
         if (process.env.NODE_ENV === "production" && (!process.env.MONGO_URL || process.env.MONGO_URL.includes("127.0.0.1"))) {
             return next(new ExpressError(500, "VERCEL ERROR: You forgot to set the MONGO_URL Environment Variable in Vercel, or it is completely wrong!"));
         }
-        return next(new ExpressError(500, "DATABASE ERROR: MongoDB Atlas is blocking Vercel. Did you add 0.0.0.0/0 to Network Access?"));
+        return next(new ExpressError(500, `DATABASE ERROR: ${err.message}. (Did you put the wrong password in Vercel?)`));
     }
-    next();
 });
 
 
