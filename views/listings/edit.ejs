@@ -1,0 +1,21 @@
+<% layout('/layouts/boilerplate') -%>
+<div class="form-wrapper">
+    <div class="container">
+        <div class="head">EDIT YOUR POST</div>
+        <form action="/edit/<%= listing.id%>?_method=PATCH" method="post">
+            <div class="inp-title" >Title</div>
+            <input name="title" type="title" placeholder="Title" value="<%= listing.title%>" required>
+            <div class="inp-title">Description</div>
+            <textarea name="description"  style="resize:none;" required><%= listing.description%></textarea>
+            <div class="inp-title">Img URL</div>
+            <input name="img" type="url" placeholder="Img URL" value="<%= listing.img%>">
+            <div class="inp-title">Price</div>
+            <input name="price" type="number" placeholder="&#8377;100" value="<%= listing.price%>" required>
+            <div class="inp-title">Location</div>
+            <input name="location"  type="text" placeholder="Location" value="<%= listing.location%>" required>
+            <div class="inp-title">Country</div>
+            <input name="country" type="text" placeholder="Country" value="<%= listing.country%>" required>
+            <button>submit</button>
+        </form>
+    </div>
+</div>

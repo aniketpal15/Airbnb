@@ -1,0 +1,18 @@
+<% layout('/layouts/boilerplate') -%>
+<div class="form-wrapper">
+    <div class="container" >
+        <div class="head">YOUR POST</div>
+        <div class="details">
+            <div class="inp-titles"><span>Title:</span> <br> <%= listing.title%> </div>
+            <div class="inp-titles"><span>Description: <br></span><%= listing.description%></div>
+            <div class="inp-titles"><span>Price:</span><br>&#8377;<%= listing.price%></div>
+            <div class="inp-titles"><span>Location:</span><br><%= listing.location%></div>
+            <div class="inp-titles"><span>Country:</span><br><%= listing.country%></div>
+            <div class="change">
+                <a href="/edit/<%= listing.id%>" class="btn">EDIT</a>
+                <a href="/" class="btn">HOME</a>
+                <form action="/delete/<%= listing.id%>?_method=DELETE" method="post" ><button class="btn">DELETE</button></form>
+            </div>
+        </div>
+    </div>
+</div>

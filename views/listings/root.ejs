@@ -1,0 +1,16 @@
+<% layout('/layouts/boilerplate') -%>
+<%- include('../includes/navbar.ejs') %>
+<div class="main">
+    <% for(let listing of alllistings){ %>
+        <a href="/show/<%= listing.id%>" target="_blank" class="cards">
+        <div class="pic">
+         <img src="<%= listing.img%>" alt="IMG">
+        </div>
+        <div class="contain_desc">
+            <div class="desc"><%= listing.title%></div>
+            <div class="price-rating"><span style="font-weight: 500;">&#8377;<%= listing.price%> </span>for one night (&star;<%= listing.rating%>)</div>
+        </div>
+    </a>
+    <%}%>
+</div>
+<%- include('../includes/footer.ejs') %>

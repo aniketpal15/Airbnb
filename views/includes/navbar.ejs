@@ -1,0 +1,26 @@
+<nav class="navbar">
+    <a href="/" class="logo-link"><i class="fa-brands fa-slack logo"></i>AIRBNB</a>
+    
+    <form action="/location" method="GET" class="search">
+        <input name="location" type="text" placeholder="Location">
+        <button><i class="fa-solid fa-magnifying-glass glass"></i></button>
+    </form>
+
+    <i class="fa-solid fa-bars hamburger" id="hamburger-icon"></i>
+
+    <div class="nav-links" id="nav-links">
+        <a href="/" class="home">HOME</a>
+        <a href="/highrated" class="highrated">HIGH RATED</a>
+        <a href="/popular" class="popular">POPULAR</a>
+        <a href="/new" class="add">ADD NEW</a>
+    </div>
+</nav>
+
+<script>
+    const hamburger = document.getElementById('hamburger-icon');
+    const navLinks = document.getElementById('nav-links');
+    
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+</script>

@@ -1,0 +1,140 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Exo", sans-serif;
+  box-sizing: border-box;
+}
+.form-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+.container{
+ margin-top: 10vh;
+ border: none;
+ height: 80vh;
+ width: 35vw;
+ min-width: 300px;
+ padding: 10px 30px;
+ border-radius: 20px;
+ display: flex;
+ flex-direction: column;
+ justify-content: flex-end;
+ background-color: #1e1e1e;
+ box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+ color: #ffffff;
+}
+
+.container .head{
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.container form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+}
+.details{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+}
+.container form input, .container form textarea, .container form button{
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+    outline: none;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #2c2c2c;
+    color: #ffffff;
+    gap: 5px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.container form input:focus, .container form textarea:focus {
+    border-color: #ff385c;
+}
+
+.container form button, .btn{
+    background-color: #ff385c;
+    color: #ffffff;
+    border: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.container form button:hover, .btn:hover{
+    transform: translateY(-2px) scale(1.02);
+    background-color: #e31c5f;
+}
+
+.container form button:active, .btn:active{
+   transform: translateY(0) scale(0.98);
+}
+
+.inp-titles{
+    width: 100%;
+    height: auto;
+    min-height: 40px;
+    padding: 10px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #b3b3b3;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 400;
+}
+.inp-titles span{
+    font-size: 17px;
+    font-weight: 600;
+    color: #ffffff;
+}
+.container form button{
+    width: 100%;
+    height: 30px;
+}
+
+.btn{
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+    outline: none;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    display: inline-block;
+    line-height: 20px; /* Align text vertically */
+}
+
+.change{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.change form {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+
+.change form button {
+    margin-bottom: 0;
+}
+@media (max-width:450px) {
+    .container{
+    width:200px ;
+}
+}
