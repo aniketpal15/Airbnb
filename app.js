@@ -40,8 +40,12 @@ main().then(() => {
 });
 
 async function main() {
+    if (process.env.NODE_ENV === "production" && (!process.env.MONGO_URL || process.env.MONGO_URL.includes("127.0.0.1"))) {
+        throw new Error("CRITICAL VERCEL ERROR: You forgot to set the MONGO_URL Environment Variable in your Vercel Dashboard, or you set it incorrectly!");
+    }
+    
     await mongoose.connect(mongo_url, { 
-        serverSelectionTimeoutMS: 5000 // Fails fast instead of hanging Vercel
+        serverSelectionTimeoutMS: 5000 
     });
 }
 
@@ -85,6 +89,16 @@ const listingSchema = new mongoose.Schema({
 
 const Listing = mongoose.model("listing", listingSchema);
 
+// Intercept requests if DB fails to connect
+app.use((req, res, next) => {
+    if (mongoose.connection.readyState !== 1) {
+        if (process.env.NODE_ENV === "production" && (!process.env.MONGO_URL || process.env.MONGO_URL.includes("127.0.0.1"))) {
+            return next(new ExpressError(500, "VERCEL ERROR: You forgot to set the MONGO_URL Environment Variable in Vercel, or it is completely wrong!"));
+        }
+        return next(new ExpressError(500, "DATABASE ERROR: MongoDB Atlas is blocking Vercel. Did you add 0.0.0.0/0 to Network Access?"));
+    }
+    next();
+});
 
 
 app.get("/", asyncwrap( async(req, res) => {
