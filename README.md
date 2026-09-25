@@ -33,7 +33,7 @@ A modern, full-stack vacation rental application inspired by Airbnb. Built with 
 ## 🚀 Live Demo
 
 Check out the live deployment of the application here:
-👉 **[View Live Project on Vercel](https://airbnb-nu-two.vercel.app)**
+👉 **[View Live Project on Vercel](https://airbnb-ashen-alpha.vercel.app/)**
 
 ---
 
