@@ -5,7 +5,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const port = 8080;
-const mongo_url = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/airbnb';
+const mongo_url = process.env.MONGO_URL || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/airbnb';
 const path = require("path");
 const ejs_Mate = require("ejs-mate");
 const methodOverride = require('method-override')
@@ -210,6 +210,7 @@ app.use((err,req,res,next)=>{
 if (process.env.NODE_ENV !== "production") {
     app.listen(port, () => {
         console.log(`Server is listening to port ${port} => http://localhost:${port}/`);
+        connectToDatabase().catch(err => console.error("Database connection error:", err.message));
     });
 }
 
